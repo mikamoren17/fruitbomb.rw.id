@@ -9,7 +9,8 @@
   </style>
 </head>
 <body>
-    <script>
+ <center>
+     <script>
  
   if (localStorage.getItem("started") !== "yes") {
     alert("Kembali kehalaman utama ..?");
@@ -34,7 +35,7 @@
   </div>
 
   <script>
-    const rows = 10, cols = 10, bombCount = 4;
+    const rows = 8, cols = 5, bombCount = 4;
     const buahList = ["🍊", "🥝", "🍇", "🍉", "🍅", "🌶️", "🍓"];
     let board = [], opened = 0, gameOver = false;
 
@@ -150,5 +151,6 @@
     updateSaldo();
     startGame();
   </script>
+ </center>
 </body>
 </html>
