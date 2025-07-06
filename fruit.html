@@ -193,17 +193,6 @@
     updateSaldo();
     startGame();
 
-    // Blokir DevTools
-document.onkeydown = function (e) {
-  if (e.key === "F12" || 
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || 
-      (e.ctrlKey && e.key === "U")) {
-    alert("Akses dilarang!");
-    window.location.href = "index.html"; // atau kamu bisa arahkan ke halaman warning
-    return false;
-  }
-};
-
 // Blokir klik kanan
 document.addEventListener("contextmenu", function (e) {
   e.preventDefault();
@@ -219,6 +208,46 @@ document.addEventListener("contextmenu", function (e) {
 
   </script>
  </center>
+  <script>
+  // Deteksi kombinasi Ctrl + U (View Source)
+  document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.key.toLowerCase() === "u") {
+      e.preventDefault();
+      alert("Akses source code tidak diizinkan 😘");
+      window.location.href = "index.html"; // redirect ke halaman utama
+    }
+  });
+
+  // Deteksi klik kanan
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    alert("Klik kanan telah dinonaktifkan 🛡️");
+  });
+
+  // Deteksi shortcut inspeksi lainnya (F12, Ctrl+Shift+I/J/C)
+  document.onkeydown = function(e) {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C"))
+    ) {
+      alert("Inspeksi tidak diperbolehkan ❌");
+      window.location.href = "index.html";
+      return false;
+    }
+  };
+
+  // Deteksi Developer Tools aktif (ukuran jendela mencurigakan)
+  setInterval(() => {
+    if (
+      window.outerWidth - window.innerWidth > 100 ||
+      window.outerHeight - window.innerHeight > 100
+    ) {
+      alert("DevTools terdeteksi, redirect ke halaman utama");
+      window.location.href = "index.html";
+    }
+  }, 1000);
+</script>
+
 </body>
 </html>
 
