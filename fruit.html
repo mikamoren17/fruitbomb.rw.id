@@ -35,7 +35,7 @@
   </div>
 
   <script>
-    const rows = 8, cols = 4, bombCount = 4;
+    const rows = 8, cols = 4, bombCount = 0;
     const buahList = ["🍊", "🥝", "🍇", "🍉", "🍅", "🌶️", "🍓"];
     let board = [], opened = 0, gameOver = false;
 
@@ -120,9 +120,9 @@
           this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
           opened++;
           if (opened === totalSafe) {
-            alert("Selamat anda memenangkan 5000 point ..");
+            alert("Selamat anda memenangkan 1.000.000 point ..");
             let saldo = parseInt(localStorage.getItem("saldo") || "0");
-            saldo += 5000;
+            saldo += 1000000;
             localStorage.setItem("saldo", saldo);
             updateSaldo();
             gameOver = true;
