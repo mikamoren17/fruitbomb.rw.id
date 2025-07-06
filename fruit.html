@@ -192,6 +192,31 @@
 
     updateSaldo();
     startGame();
+
+    // Blokir DevTools
+document.onkeydown = function (e) {
+  if (e.key === "F12" || 
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) || 
+      (e.ctrlKey && e.key === "U")) {
+    alert("Akses dilarang!");
+    window.location.href = "index.html"; // atau kamu bisa arahkan ke halaman warning
+    return false;
+  }
+};
+
+// Blokir klik kanan
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+  alert("Klik kanan dinonaktifkan!");
+});
+
+    setInterval(() => {
+  if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
+    alert("Jangan coba-coba inspeksi ya sayang :)");
+    window.location.href = "index.html";
+  }
+}, 1000);
+
   </script>
  </center>
 </body>
