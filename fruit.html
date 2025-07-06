@@ -29,7 +29,7 @@
 
   <script>
     // setting menang kalah
-    const rows = 8, cols = 4, bombCount = 27, diamondCount = 1;
+    const rows = 8, cols = 4, bombCount = 2, diamondCount = 1;
     const buahList = ["🍊", "🥝", "🍇", "🍉", "🍅", "🌶️", "🍓"];
     let board = [], opened = 0, gameOver = false;
 
@@ -54,118 +54,127 @@
     }
 
     function startGame() {
-      board = [];
-      opened = 0;
-      gameOver = false;
-      const totalCell = rows * cols;
-      const totalSafe = totalCell - bombCount - diamondCount;
+  board = [];
+  opened = 0;
+  gameOver = false;
+  const totalCell = rows * cols;
+  const totalSafe = totalCell - bombCount - diamondCount;
 
-      // Inisialisasi papan
-      for (let r = 0; r < rows; r++) {
-        board[r] = [];
-        for (let c = 0; c < cols; c++) {
-          board[r][c] = { bomb: false, diamond: false, revealed: false };
-        }
-      }
+  // Inisialisasi papan
+  for (let r = 0; r < rows; r++) {
+    board[r] = [];
+    for (let c = 0; c < cols; c++) {
+      board[r][c] = { bomb: false, diamond: false, revealed: false };
+    }
+  }
 
-      // Pasang bom
-      let placedBomb = 0;
-      while (placedBomb < bombCount) {
-        let r = Math.floor(Math.random() * rows);
-        let c = Math.floor(Math.random() * cols);
-        if (!board[r][c].bomb) {
-          board[r][c].bomb = true;
-          placedBomb++;
-        }
-      }
+  // 🔧 Manual bombs diatur di sini
+  const manualBombs = [
+    [2, 1]
+  ];
 
-      // Pasang diamond 💎
-      let placedDiamond = 0;
-      while (placedDiamond < diamondCount) {
-        let r = Math.floor(Math.random() * rows);
-        let c = Math.floor(Math.random() * cols);
-        if (!board[r][c].bomb && !board[r][c].diamond) {
-          board[r][c].diamond = true;
-          placedDiamond++;
-        }
-      }
+  // Pasang bom manual
+  manualBombs.forEach(([r, c]) => {
+    if (board[r] && board[r][c]) {
+      board[r][c].bomb = true;
+    }
+  });
 
-      // Buat board HTML
-      const gameBoard = document.getElementById("game-board");
-      gameBoard.innerHTML = "";
-      for (let r = 0; r < rows; r++) {
-        const rowDiv = document.createElement("div");
-        rowDiv.className = "row";
-        for (let c = 0; c < cols; c++) {
-          const cell = document.createElement("div");
-          cell.className = "cell";
-          cell.dataset.row = r;
-          cell.dataset.col = c;
-          cell.addEventListener("click", revealCell);
-          rowDiv.appendChild(cell);
-        }
-        gameBoard.appendChild(rowDiv);
-      }
+  // Pasang bom random (sisanya)
+  let placedBomb = manualBombs.length;
+  while (placedBomb < bombCount) {
+    let r = Math.floor(Math.random() * rows);
+    let c = Math.floor(Math.random() * cols);
+    if (!board[r][c].bomb) {
+      board[r][c].bomb = true;
+      placedBomb++;
+    }
+  }
 
-      function revealCell() {
-        if (gameOver) return;
-        const r = +this.dataset.row;
-        const c = +this.dataset.col;
-        const cellData = board[r][c];
-        if (cellData.revealed) return;
+  // Pasang diamond 💎
+  let placedDiamond = 0;
+  while (placedDiamond < diamondCount) {
+    let r = Math.floor(Math.random() * rows);
+    let c = Math.floor(Math.random() * cols);
+    if (!board[r][c].bomb && !board[r][c].diamond) {
+      board[r][c].diamond = true;
+      placedDiamond++;
+    }
+  }
 
-        cellData.revealed = true;
-        this.classList.add("revealed");
+  // Buat board HTML
+  const gameBoard = document.getElementById("game-board");
+  gameBoard.innerHTML = "";
+  for (let r = 0; r < rows; r++) {
+    const rowDiv = document.createElement("div");
+    rowDiv.className = "row";
+    for (let c = 0; c < cols; c++) {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+      cell.dataset.row = r;
+      cell.dataset.col = c;
+      cell.addEventListener("click", revealCell);
+      rowDiv.appendChild(cell);
+    }
+    gameBoard.appendChild(rowDiv);
+  }
 
-        if (cellData.bomb) {
-          this.classList.add("bomb");
-          this.textContent = "💣";
-          gameOver = true;
-          revealAll();
-          alert("Anda kalah ..!");
-        } else if (cellData.diamond) {
-          this.textContent = "💎";
-          let saldo = parseInt(localStorage.getItem("saldo") || "0");
-          saldo += 1500;
-          localStorage.setItem("saldo", saldo);
-          updateSaldo();
-        } else {
-          this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
-          opened++;
-          if (opened === totalSafe) {
-            alert("Selamat anda memenangkan 1.000.000 point ..");
-            let saldo = parseInt(localStorage.getItem("saldo") || "0");
-            //setting win berapa
-            saldo += 500000;
-            localStorage.setItem("saldo", saldo);
-            updateSaldo();
-            gameOver = true;
-          }
-        }
-      }
+  function revealCell() {
+    if (gameOver) return;
+    const r = +this.dataset.row;
+    const c = +this.dataset.col;
+    const cellData = board[r][c];
+    if (cellData.revealed) return;
 
-      function revealAll() {
-        document.querySelectorAll(".cell").forEach(cell => {
-          const r = +cell.dataset.row;
-          const c = +cell.dataset.col;
-          const data = board[r][c];
-          if (!data.revealed) {
-            cell.classList.add("revealed");
-            if (data.bomb) {
-              cell.classList.add("bomb");
-              cell.textContent = "💣";
-            } else if (data.diamond) {
-              cell.textContent = "💎";
-            } else {
-              cell.textContent = buahList[Math.floor(Math.random() * buahList.length)];
-            }
-          }
-        });
+    cellData.revealed = true;
+    this.classList.add("revealed");
+
+    if (cellData.bomb) {
+      this.classList.add("bomb");
+      this.textContent = "💣";
+      gameOver = true;
+      revealAll();
+      alert("Anda kalah ..!");
+    } else if (cellData.diamond) {
+      this.textContent = "💎";
+      let saldo = parseInt(localStorage.getItem("saldo") || "0");
+      saldo += 1500;
+      localStorage.setItem("saldo", saldo);
+      updateSaldo();
+    } else {
+      this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
+      opened++;
+      if (opened === totalSafe) {
+        alert("Selamat anda memenangkan 1.000.000 point ..");
+        let saldo = parseInt(localStorage.getItem("saldo") || "0");
+        saldo += 500000;
+        localStorage.setItem("saldo", saldo);
+        updateSaldo();
+        gameOver = true;
       }
     }
+  }
 
-    updateSaldo();
-    startGame();
+  function revealAll() {
+    document.querySelectorAll(".cell").forEach(cell => {
+      const r = +cell.dataset.row;
+      const c = +cell.dataset.col;
+      const data = board[r][c];
+      if (!data.revealed) {
+        cell.classList.add("revealed");
+        if (data.bomb) {
+          cell.classList.add("bomb");
+          cell.textContent = "💣";
+        } else if (data.diamond) {
+          cell.textContent = "💎";
+        } else {
+          cell.textContent = buahList[Math.floor(Math.random() * buahList.length)];
+        }
+      }
+    });
+  }
+}
+
   </script>
  </center>
 </body>
