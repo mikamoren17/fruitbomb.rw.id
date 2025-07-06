@@ -99,6 +99,7 @@ body {
 
     .btn-secondary {
       background-color: #757575;
+      margin-bottom: 20px;
     }
 
     .btn-secondary:hover {
