@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>fruitbomb.rw.id</title>
+  <link rel="stylesheet" href="fruit.css">
+  <style>
+  </style>
+</head>
+<body>
+    <script>
+ 
+  if (localStorage.getItem("started") !== "yes") {
+    alert("Kembali kehalaman utama ..?");
+    window.location.href = "index.html";
+  } else {
+    localStorage.removeItem("started");
+  }
+
+ 
+</script>
+
+  <h1>🎮 FRUIT BOMB 🍇</h1>
+  <div class="saldo">Saldo: <span id="saldo">0</span> point</div>
+  <center>
+    <P>Buka semua buah untuk memenangkan hadiah, namun waspada ada 4 bom yang bersembunyi.</P>
+  </center>
+  <div id="game-board"></div>
+
+  <div class="button-container">
+    <button class="btn" onclick="mulaiLagi()">Play again</button>
+    <button class="btn btn-secondary" onclick="keHome()">Home</button>
+  </div>
+
+  <script>
+    const rows = 10, cols = 10, bombCount = 4;
+    const buahList = ["🍊", "🥝", "🍇", "🍉", "🍅", "🌶️", "🍓"];
+    let board = [], opened = 0, gameOver = false;
+
+    function updateSaldo() {
+      document.getElementById("saldo").innerText = localStorage.getItem("saldo") || 0;
+    }
+    
+    
+
+    function mulaiLagi() {
+      let saldo = parseInt(localStorage.getItem("saldo") || "0");
+      if (saldo < 2000) {
+        alert("Saldo point anda tidak mecukupi, harap isi ulang ..");
+        return;
+      }
+      saldo -= 2000;
+      localStorage.setItem("saldo", saldo);
+      updateSaldo();
+      startGame();
+    }
+
+    function keHome() {
+      window.location.href = "index.html";
+    }
+
+    function startGame() {
+      board = [];
+      opened = 0;
+      gameOver = false;
+      const totalSafe = rows * cols - bombCount;
+
+      for (let r = 0; r < rows; r++) {
+        board[r] = [];
+        for (let c = 0; c < cols; c++) {
+          board[r][c] = { bomb: false, revealed: false };
+        }
+      }
+
+      let placed = 0;
+      while (placed < bombCount) {
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * cols);
+        if (!board[r][c].bomb) {
+          board[r][c].bomb = true;
+          placed++;
+        }
+      }
+
+      const gameBoard = document.getElementById("game-board");
+      gameBoard.innerHTML = "";
+      for (let r = 0; r < rows; r++) {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "row";
+        for (let c = 0; c < cols; c++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          cell.dataset.row = r;
+          cell.dataset.col = c;
+          cell.addEventListener("click", revealCell);
+          rowDiv.appendChild(cell);
+        }
+        gameBoard.appendChild(rowDiv);
+      }
+
+      function revealCell() {
+        if (gameOver) return;
+        const r = +this.dataset.row;
+        const c = +this.dataset.col;
+        const cellData = board[r][c];
+        if (cellData.revealed) return;
+
+        cellData.revealed = true;
+        this.classList.add("revealed");
+
+        if (cellData.bomb) {
+          this.classList.add("bomb");
+          this.textContent = "💣";
+          gameOver = true;
+          revealAll();
+          alert("Anda kalah ..!");
+        } else {
+          this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
+          opened++;
+          if (opened === totalSafe) {
+            alert("Selamat anda memenangkan 5000 point ..");
+            let saldo = parseInt(localStorage.getItem("saldo") || "0");
+            saldo += 5000;
+            localStorage.setItem("saldo", saldo);
+            updateSaldo();
+            gameOver = true;
+          }
+        }
+      }
+
+      function revealAll() {
+        document.querySelectorAll(".cell").forEach(cell => {
+          const r = +cell.dataset.row;
+          const c = +cell.dataset.col;
+          const data = board[r][c];
+          if (!data.revealed) {
+            cell.classList.add("revealed");
+            if (data.bomb) {
+              cell.classList.add("bomb");
+              cell.textContent = "💣";
+            } else {
+              cell.textContent = buahList[Math.floor(Math.random() * buahList.length)];
+            }
+          }
+        });
+      }
+    }
+
+    updateSaldo();
+    startGame();
+  </script>
+</body>
+</html>

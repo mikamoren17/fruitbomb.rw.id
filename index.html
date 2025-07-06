@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fruitbomb.rw.id</title>
+  <link rel="stylesheet" href="home.css">
+  
+</head>
+<body>
+  <h1>WELCOME TO FRUIT BOMB </h1>
+  <h2>Modal 2000 bisa jadi Jutaan</h2>
+  <img src="img/pfp.jpg" alt="Fruit Bomb">
+  <div class="saldo">Saldo: <span id="saldo">0</span> poin</div>
+
+  <div>
+    <button class="btn" onclick="mulaiGame()">Main</button>
+    <button class="btn btn-secondary" onclick="resetSaldo()">Top Up Saldo</button>
+  </div>
+
+  <script>
+
+    function loadSaldo() {
+      let saldo = localStorage.getItem("saldo");
+      if (saldo === null) {
+        saldo = 10000;
+        localStorage.setItem("saldo", saldo);
+      }
+      document.getElementById("saldo").innerText = saldo;
+    }
+
+    
+function mulaiGame() {
+  let saldo = parseInt(localStorage.getItem("saldo") || "0");
+  if (saldo < 2000) {
+    alert("Maaf saldo anda tidak mencukupi, harap isi ulang saldo dimenu utama ..");
+    return;
+  }
+  localStorage.setItem("saldo", saldo - 2000);
+  localStorage.setItem("started", "yes");
+  window.location.href = "fruit.html";
+}
+
+
+
+    function resetSaldo() {
+      if (confirm("Top Up Saldo ?")) {
+        localStorage.setItem("saldo", 10500);
+        loadSaldo();
+      }
+    }
+
+    loadSaldo();
+  </script>
+</body>
+</html>

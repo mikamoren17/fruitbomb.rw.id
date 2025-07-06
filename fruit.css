@@ -1,0 +1,102 @@
+body {
+      background-color: black;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: bolder;
+      margin-top: 20px;
+      color: white;
+      text-shadow: 0px 3px 5px purple;
+    }
+
+    .saldo {
+      font-size: 30px;
+      color: #fdd835;
+      margin-bottom: 20px;
+    }
+
+    P {
+        font-size: 20px;
+        color: #fdd835;
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+
+    #game-board {
+      display: inline-block;
+      background-color: #111;
+      padding: 10px;
+      border-radius: 12px;
+      border: 3px solid #7c4dff;
+      box-shadow: 0 0 15px rgba(140, 0, 255, 0.5);
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      width: 82px;
+      height: 82px;
+      margin: 2px;
+      background-color: #333;
+      border-radius: 8px;
+      border: 1px solid #888;
+      font-size: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+    }
+
+    .cell.revealed {
+      background-color: #222;
+      cursor: default;
+    }
+
+    .cell.bomb {
+      background-color: #b71c1c;
+      color: white;
+    }
+
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 10px 22px;
+      width: 250px;
+      height: 70px;
+      margin-top: 45px;
+      background-color: #fdd835;
+      color: black;
+      font-size: 30px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #651fff;
+    }
+
+    .btn-secondary {
+      background-color: #757575;
+    }
+
+    .btn-secondary:hover {
+      background-color: #616161;
+    }
