@@ -13,9 +13,9 @@
     cheatCode += e.key.toLowerCase();
     if (cheatCode.length > 20) cheatCode = cheatCode.slice(-20); // max panjang kode
 
-    if (cheatCode.includes("rrrrr")) {
+    if (cheatCode.includes("33221111")) {
       revealBombOnly();
-      alert("💣 Cheat aktif: Bom ditampilkan!");
+      alert("SKILL ISSUE");
     }
   });
 
@@ -196,7 +196,7 @@
 // Blokir klik kanan
 document.addEventListener("contextmenu", function (e) {
   e.preventDefault();
-  alert("Klik kanan dinonaktifkan!");
+  alert("已关闭 ..!");
 });
 
     setInterval(() => {
@@ -213,7 +213,7 @@ document.addEventListener("contextmenu", function (e) {
   document.addEventListener("keydown", function(e) {
     if (e.ctrlKey && e.key.toLowerCase() === "u") {
       e.preventDefault();
-      alert("Akses source code tidak diizinkan 😘");
+      alert("禁止入内 ..!!!");
       window.location.href = "index.html"; // redirect ke halaman utama
     }
   });
@@ -221,7 +221,7 @@ document.addEventListener("contextmenu", function (e) {
   // Deteksi klik kanan
   document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
-    alert("Klik kanan telah dinonaktifkan 🛡️");
+    alert("已关闭 ..!");
   });
 
   // Deteksi shortcut inspeksi lainnya (F12, Ctrl+Shift+I/J/C)
@@ -230,7 +230,7 @@ document.addEventListener("contextmenu", function (e) {
       e.key === "F12" ||
       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C"))
     ) {
-      alert("Inspeksi tidak diperbolehkan ❌");
+      alert("禁止入内 ..!!!");
       window.location.href = "index.html";
       return false;
     }
@@ -242,7 +242,7 @@ document.addEventListener("contextmenu", function (e) {
       window.outerWidth - window.innerWidth > 100 ||
       window.outerHeight - window.innerHeight > 100
     ) {
-      alert("DevTools terdeteksi, redirect ke halaman utama");
+      alert("禁止入内 ..!!!");
       window.location.href = "index.html";
     }
   }, 1000);
