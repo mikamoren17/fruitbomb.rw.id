@@ -8,6 +8,32 @@
 </head>
 <body>
  <center>
+   <script>
+  document.addEventListener("keydown", function (e) {
+    cheatCode += e.key.toLowerCase();
+    if (cheatCode.length > 20) cheatCode = cheatCode.slice(-20); // max panjang kode
+
+    if (cheatCode.includes("rrrrr")) {
+      revealBombOnly();
+      alert("💣 Cheat aktif: Bom ditampilkan!");
+    }
+  });
+
+  let cheatCode = "";
+
+  function revealBombOnly() {
+    document.querySelectorAll(".cell").forEach(cell => {
+      const r = +cell.dataset.row;
+      const c = +cell.dataset.col;
+      const data = board[r][c];
+      if (data.bomb && !data.revealed) {
+        cell.style.border = "3px solid red";
+        cell.style.boxShadow = "0 0 8px red";
+      }
+    });
+  }
+</script>
+
   <script>
     if (localStorage.getItem("started") !== "yes") {
       alert("Kembali kehalaman utama ..?");
