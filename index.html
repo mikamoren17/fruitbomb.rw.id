@@ -17,7 +17,7 @@
 
   <div>
     <button class="btn" onclick="mulaiGame()">Main</button>
-    <button class="btn btn-secondary" onclick="resetSaldo()">Top Up Saldo</button>
+    <button class="btn btn-secondary" onclick="resetSaldo()">Reset saldo</button>
   </div>
 
   <script>
@@ -46,8 +46,8 @@ function mulaiGame() {
 
 
     function resetSaldo() {
-      if (confirm("Top Up Saldo ?")) {
-        localStorage.setItem("saldo", 10500);
+      if (confirm("Reset saldo ..?")) {
+        localStorage.setItem("saldo", 10000);
         loadSaldo();
       }
     }
