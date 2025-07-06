@@ -193,15 +193,9 @@
     updateSaldo();
     startGame();
 
-// Blokir klik kanan
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-  alert("已关闭 ..!");
-});
-
     setInterval(() => {
   if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
-    alert("Jangan coba-coba inspeksi ya sayang :)");
+    alert("禁止入内 ..!!!");
     window.location.href = "index.html";
   }
 }, 1000);
