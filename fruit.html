@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="fruit.css">
 </head>
 <body>
-  <audio id="gameBgm" src="https://files.catbox.moe/ucvi2g.mp3" autoplay loop></audio>
+  <audio id="gameBgm" src="https://files.catbox.moe/yu40d3.mp3" autoplay loop></audio>
 
 <script>
   const gameBgm = document.getElementById("gameBgm");
   document.addEventListener("click", () => {
     gameBgm.play();
   });
-  homeBgm.volume = 0.3; // volume 30%
+  homeBgm.volume = 0.2; // volume 30%
 
 </script>
 
@@ -170,7 +170,7 @@
           this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
           opened++;
           if (opened === totalSafe) {
-            alert("Selamat anda memenangkan 1.000.000 point ..");
+            alert("Selamat anda memenangkan 500.000 point ..");
             let saldo = parseInt(localStorage.getItem("saldo") || "0");
             //setting win berapa
             saldo += 500000;
@@ -206,7 +206,7 @@
 
     setInterval(() => {
   if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
-    alert("禁止入内 ..!!!");
+    alert("Gak boleh..!!!");
     window.location.href = "index.html";
   }
 }, 1000);
@@ -218,7 +218,7 @@
   document.addEventListener("keydown", function(e) {
     if (e.ctrlKey && e.key.toLowerCase() === "u") {
       e.preventDefault();
-      alert("禁止入内 ..!!!");
+      alert("Gak boleh..!!!");
       window.location.href = "index.html"; // redirect ke halaman utama
     }
   });
@@ -226,7 +226,7 @@
   // Deteksi klik kanan
   document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
-    alert("已关闭 ..!");
+    alert("Gak boleh..!");
   });
 
   // Deteksi shortcut inspeksi lainnya (F12, Ctrl+Shift+I/J/C)
@@ -235,7 +235,7 @@
       e.key === "F12" ||
       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C"))
     ) {
-      alert("禁止入内 ..!!!");
+      alert("Gak boleh..!!!");
       window.location.href = "index.html";
       return false;
     }
@@ -247,7 +247,7 @@
       window.outerWidth - window.innerWidth > 100 ||
       window.outerHeight - window.innerHeight > 100
     ) {
-      alert("禁止入内 ..!!!");
+      alert("Gak boleh..!!!");
       window.location.href = "index.html";
     }
   }, 1000);
