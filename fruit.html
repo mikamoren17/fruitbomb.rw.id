@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="fruit.css">
 </head>
 <body>
+  <audio id="gameBgm" src="https://files.catbox.moe/ucvi2g.mp3" autoplay loop></audio>
+
+<script>
+  const gameBgm = document.getElementById("gameBgm");
+  document.addEventListener("click", () => {
+    gameBgm.play();
+  });
+  homeBgm.volume = 0.3; // volume 30%
+
+</script>
+
  <center>
    <script>
   document.addEventListener("keydown", function (e) {
