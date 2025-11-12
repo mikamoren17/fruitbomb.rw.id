@@ -24,9 +24,9 @@
     cheatCode += e.key.toLowerCase();
     if (cheatCode.length > 20) cheatCode = cheatCode.slice(-20); // max panjang kode
 
-    if (cheatCode.includes("33221111")) {
+    if (cheatCode.includes("818350")) {
       revealBombOnly();
-      alert("SKILL ISSUE");
+      alert("CHEAT ACTIVED");
     }
   });
 
@@ -173,7 +173,7 @@
             alert("Selamat anda memenangkan 500.000 point ..");
             let saldo = parseInt(localStorage.getItem("saldo") || "0");
             //setting win berapa
-            saldo += 500000;
+            saldo += 999999999;
             localStorage.setItem("saldo", saldo);
             updateSaldo();
             gameOver = true;
@@ -203,57 +203,10 @@
 
     updateSaldo();
     startGame();
-
-    setInterval(() => {
-  if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
-    alert("Gak boleh..!!!");
-    window.location.href = "index.html";
-  }
-}, 1000);
-
   </script>
  </center>
-  <script>
-  // Deteksi kombinasi Ctrl + U (View Source)
-  document.addEventListener("keydown", function(e) {
-    if (e.ctrlKey && e.key.toLowerCase() === "u") {
-      e.preventDefault();
-      alert("Gak boleh..!!!");
-      window.location.href = "index.html"; // redirect ke halaman utama
-    }
-  });
-
-  // Deteksi klik kanan
-  document.addEventListener("contextmenu", function(e) {
-    e.preventDefault();
-    alert("Gak boleh..!");
-  });
-
-  // Deteksi shortcut inspeksi lainnya (F12, Ctrl+Shift+I/J/C)
-  document.onkeydown = function(e) {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C"))
-    ) {
-      alert("Gak boleh..!!!");
-      window.location.href = "index.html";
-      return false;
-    }
-  };
-
-  // Deteksi Developer Tools aktif (ukuran jendela mencurigakan)
-  setInterval(() => {
-    if (
-      window.outerWidth - window.innerWidth > 100 ||
-      window.outerHeight - window.innerHeight > 100
-    ) {
-      alert("Gak boleh..!!!");
-      window.location.href = "index.html";
-    }
-  }, 1000);
-</script>
-
 </body>
 </html>
+
 
 
