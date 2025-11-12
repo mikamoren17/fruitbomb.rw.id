@@ -20,17 +20,7 @@
 
  <center>
    <script>
-  document.addEventListener("keydown", function (e) {
-    cheatCode += e.key.toLowerCase();
-    if (cheatCode.length > 20) cheatCode = cheatCode.slice(-20); // max panjang kode
-
-    if (cheatCode.includes("818350")) {
-      revealBombOnly();
-      alert("CHEAT ACTIVED");
-    }
-  });
-
-  let cheatCode = "";
+ 
 
   function revealBombOnly() {
     document.querySelectorAll(".cell").forEach(cell => {
@@ -207,6 +197,7 @@
  </center>
 </body>
 </html>
+
 
 
 
