@@ -56,7 +56,7 @@
 
   <script>
     // setting menang kalah
-    const rows = 8, cols = 4, bombCount = 1, diamondCount = 1;
+    const rows = 8, cols = 4, bombCount = 2, diamondCount = 2;
     const buahList = ["🍊", "🥝", "🍇", "🍉", "🍅", "🌶️", "🍓"];
     let board = [], opened = 0, gameOver = false;
 
@@ -160,7 +160,7 @@
           this.textContent = buahList[Math.floor(Math.random() * buahList.length)];
           opened++;
           if (opened === totalSafe) {
-            alert("Selamat anda memenangkan 500.000 point ..");
+            alert("Selamat anda memenangkan point ..");
             let saldo = parseInt(localStorage.getItem("saldo") || "0");
             //setting win berapa
             saldo += 10000;
@@ -197,6 +197,7 @@
  </center>
 </body>
 </html>
+
 
 
 
